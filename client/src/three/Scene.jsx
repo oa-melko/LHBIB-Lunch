@@ -10,7 +10,7 @@ function FittedBook() {
   // narrow screens: zoom on the right page, keep the left one peeking
   const narrow = viewport.width < SPREAD_W + 0.6
   const s = narrow
-    ? Math.min(viewport.width / 3.1, viewport.height / 5.0)
+    ? Math.min(viewport.width / 2.75, viewport.height / 5.2)
     : Math.min(1.05, viewport.width / (SPREAD_W + 1), viewport.height / (SPREAD_H + 1.2))
   const x = narrow ? -1.2 * s : 0
 

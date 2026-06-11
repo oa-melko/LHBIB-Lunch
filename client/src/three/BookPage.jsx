@@ -31,10 +31,32 @@ function PageContent({ mode, category, currency }) {
   if (mode === 'cover')
     return (
       <div className="page-art" onClick={() => setCatIndex(0)} style={{ cursor: 'pointer' }}>
-        <div className="big-emoji">🍕</div>
-        <h2>LHBIB</h2>
-        <div style={{ fontWeight: 900, fontSize: 20, color: 'var(--terracotta-dark)' }}>Le Menu</div>
-        <div className="count" style={{ marginTop: 18 }}>
+        <div className="big-emoji" style={{ fontSize: 42 }}>🍕</div>
+        <h2 style={{ fontSize: 26 }}>LHBIB</h2>
+        <div style={{ fontWeight: 900, fontSize: 15, color: 'var(--charcoal)', opacity: 0.6 }}>Le Menu</div>
+        <div className="who" style={{ color: '#fff', marginTop: 6 }}>Qui es-tu ?</div>
+        <div className="mini-avatars">
+          {members
+            .filter((m) => m.active)
+            .map((m) => (
+              <button
+                key={m.id}
+                className={`mini-avatar on-cover${m.id === meId ? ' selected' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setMe(m.id)
+                  showToast(`Salam ${m.name} ! 👋`)
+                  setCatIndex(0)
+                }}
+              >
+                <span className="avatar" style={{ background: m.color }}>
+                  {m.name[0]?.toUpperCase()}
+                </span>
+                <span className="mini-name">{m.name}</span>
+              </button>
+            ))}
+        </div>
+        <div className="count" style={{ marginTop: 8 }}>
           👆 Touche pour ouvrir
         </div>
       </div>

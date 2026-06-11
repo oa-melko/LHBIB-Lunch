@@ -905,6 +905,28 @@ input {
   color: var(--charcoal);
 }
 
+.mini-avatar.on-cover .mini-name {
+  color: #fff;
+}
+
+.mini-avatar.on-cover {
+  padding: 3px;
+}
+
+.mini-avatar.on-cover .avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.mini-avatar.on-cover.selected .avatar {
+  outline-color: #fff;
+}
+
+.mini-avatar.on-cover.selected .mini-name {
+  color: #fff;
+}
+
 .mini-avatar.selected .mini-name {
   color: var(--green-dark);
 }
