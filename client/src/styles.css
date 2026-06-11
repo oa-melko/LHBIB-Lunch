@@ -852,6 +852,67 @@ input {
   font-size: 15px;
 }
 
+.page-art .who {
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--charcoal);
+  margin-top: 16px;
+}
+
+.mini-avatars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 6px;
+  max-width: 300px;
+}
+
+.mini-avatar {
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 14px;
+  transition: transform 0.15s;
+}
+
+.mini-avatar:hover {
+  transform: translateY(-3px) scale(1.08) rotate(-2deg);
+}
+
+.mini-avatar:active {
+  transform: scale(0.92);
+}
+
+.mini-avatar .avatar {
+  width: 46px;
+  height: 46px;
+  font-size: 19px;
+  box-shadow: 0 4px 10px rgba(38, 70, 83, 0.18);
+}
+
+.mini-avatar.selected .avatar {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+}
+
+.mini-avatar .mini-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--charcoal);
+}
+
+.mini-avatar.selected .mini-name {
+  color: var(--green-dark);
+}
+
+.name-card.selected {
+  outline: 3px solid var(--green);
+}
+
 .nav-arrows {
   position: absolute;
   bottom: calc(95px + env(safe-area-inset-bottom));

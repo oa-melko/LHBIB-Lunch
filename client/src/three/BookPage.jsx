@@ -13,6 +13,20 @@ function priceLabel(item, currency) {
 function PageContent({ mode, category, currency }) {
   const openModal = useStore((s) => s.openModal)
   const setCatIndex = useStore((s) => s.setCatIndex)
+  const members = useStore((s) => s.dayState?.members ?? [])
+  const meId = useStore((s) => s.meId)
+  const setMe = useStore((s) => s.setMe)
+  const openPicker = useStore((s) => s.openPicker)
+  const showToast = useStore((s) => s.showToast)
+
+  const pickDish = (item, category) => {
+    if (!meId) {
+      showToast('Dis-nous qui tu es d’abord 👋')
+      openPicker()
+      return
+    }
+    openModal(item, category)
+  }
 
   if (mode === 'cover')
     return (
@@ -29,9 +43,29 @@ function PageContent({ mode, category, currency }) {
   if (mode === 'blank')
     return (
       <div className="page-art">
-        <div className="big-emoji">👋</div>
+        <div className="big-emoji" style={{ fontSize: 64 }}>👋</div>
         <h2 style={{ fontSize: 24 }}>Salam l'équipe !</h2>
         <div className="count">Choisis ton déj du jour</div>
+        <div className="who">Qui es-tu ?</div>
+        <div className="mini-avatars">
+          {members
+            .filter((m) => m.active)
+            .map((m) => (
+              <button
+                key={m.id}
+                className={`mini-avatar${m.id === meId ? ' selected' : ''}`}
+                onClick={() => {
+                  setMe(m.id)
+                  showToast(`Salam ${m.name} ! 👋`)
+                }}
+              >
+                <span className="avatar" style={{ background: m.color }}>
+                  {m.name[0]?.toUpperCase()}
+                </span>
+                <span className="mini-name">{m.name}</span>
+              </button>
+            ))}
+        </div>
       </div>
     )
 
@@ -57,7 +91,7 @@ function PageContent({ mode, category, currency }) {
       {category.note && <div className="page-cat-note">{category.note}</div>}
       <div className="dish-list">
         {category.items.map((item) => (
-          <button key={item.id} className="dish-row" onClick={() => openModal(item, category)}>
+          <button key={item.id} className="dish-row" onClick={() => pickDish(item, category)}>
             <span className="grow">
               <span className="dish-name">{item.name}</span>
               {item.desc && <span className="dish-desc">{item.desc}</span>}

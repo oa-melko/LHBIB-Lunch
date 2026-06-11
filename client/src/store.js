@@ -31,6 +31,9 @@ export const useStore = create((set, get) => ({
   setCatIndex: (i) => set({ catIndex: i }),
 
   setScreen: (screen) => set({ screen }),
+  pickerOpen: false,
+  openPicker: () => set({ pickerOpen: true }),
+  closePicker: () => set({ pickerOpen: false }),
   togglePanel: () => set((s) => ({ panelOpen: !s.panelOpen })),
   openModal: (item, category) => set({ modalItem: { item, category } }),
   closeModal: () => set({ modalItem: null }),

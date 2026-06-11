@@ -22,6 +22,8 @@ export default function Tray() {
     }
   }, [trayBump])
 
+  if (!me) return null
+
   const myTotal = myItems.reduce((s, i) => s + i.lineTotal, 0)
   const count = myItems.reduce((s, i) => s + i.quantity, 0)
 

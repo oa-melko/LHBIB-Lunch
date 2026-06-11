@@ -11,12 +11,12 @@ import Settings from './components/Settings.jsx'
 import Scene from './three/Scene.jsx'
 
 export default function App() {
-  const { menu, dayState, screen, panelOpen, modalItem, connected, toast, catIndex } = useStore()
+  const { menu, dayState, screen, panelOpen, modalItem, connected, toast, catIndex, pickerOpen } = useStore()
   const setCatIndex = useStore((s) => s.setCatIndex)
   const me = useStore(selectMe)
   const togglePanel = useStore((s) => s.togglePanel)
   const setScreen = useStore((s) => s.setScreen)
-  const clearMe = useStore((s) => s.clearMe)
+  const openPicker = useStore((s) => s.openPicker)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -52,8 +52,6 @@ export default function App() {
 
       {screen === 'settings' ? (
         <Settings />
-      ) : !me ? (
-        <NamePicker />
       ) : (
         <>
           <div className="canvas-wrap">
@@ -68,9 +66,9 @@ export default function App() {
             <button className="chip accent" onClick={togglePanel}>
               🍽️ {dayState.confirmedCount}/{dayState.activeCount}
             </button>
-            <button className="chip" onClick={clearMe} title="Changer de personne">
-              <span className="avatar" style={{ background: me.color }}>
-                {me.name[0]?.toUpperCase()}
+            <button className="chip" onClick={openPicker} title="Changer de personne">
+              <span className="avatar" style={{ background: me?.color ?? '#cbd5d1' }}>
+                {me ? me.name[0]?.toUpperCase() : '?'}
               </span>
             </button>
             <button className="chip" onClick={() => setScreen('settings')}>
@@ -100,6 +98,7 @@ export default function App() {
           <Tray />
           {panelOpen && <Dashboard />}
           {modalItem && <ItemModal />}
+          {pickerOpen && <NamePicker />}
         </>
       )}
 
