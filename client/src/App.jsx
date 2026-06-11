@@ -3,6 +3,7 @@ import { useStore, selectMe } from './store.js'
 import { api } from './api.js'
 import { connectSocket } from './socket.js'
 import NamePicker from './components/NamePicker.jsx'
+import Tabs from './components/Tabs.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import Tray from './components/Tray.jsx'
 import ItemModal from './components/ItemModal.jsx'
@@ -10,7 +11,8 @@ import Settings from './components/Settings.jsx'
 import Scene from './three/Scene.jsx'
 
 export default function App() {
-  const { menu, dayState, screen, panelOpen, modalItem, connected, toast } = useStore()
+  const { menu, dayState, screen, panelOpen, modalItem, connected, toast, catIndex } = useStore()
+  const setCatIndex = useStore((s) => s.setCatIndex)
   const me = useStore(selectMe)
   const togglePanel = useStore((s) => s.togglePanel)
   const setScreen = useStore((s) => s.setScreen)
@@ -73,6 +75,25 @@ export default function App() {
             </button>
             <button className="chip" onClick={() => setScreen('settings')}>
               ⚙️
+            </button>
+          </div>
+
+          <Tabs />
+
+          <div className="nav-arrows">
+            <button
+              className="nav-arrow"
+              disabled={catIndex <= 0}
+              onClick={() => setCatIndex(Math.max(0, catIndex - 1))}
+            >
+              ‹
+            </button>
+            <button
+              className="nav-arrow"
+              disabled={catIndex >= menu.categories.length - 1}
+              onClick={() => setCatIndex(Math.min(menu.categories.length - 1, catIndex + 1))}
+            >
+              ›
             </button>
           </div>
 

@@ -26,6 +26,10 @@ export const useStore = create((set, get) => ({
     set({ meId: null })
   },
 
+  // -1 = couverture du livre, >= 0 = index de catégorie
+  catIndex: -1,
+  setCatIndex: (i) => set({ catIndex: i }),
+
   setScreen: (screen) => set({ screen }),
   togglePanel: () => set((s) => ({ panelOpen: !s.panelOpen })),
   openModal: (item, category) => set({ modalItem: { item, category } }),
