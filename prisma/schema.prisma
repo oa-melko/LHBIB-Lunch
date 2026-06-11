@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model TeamMember {
+  id       Int               @id @default(autoincrement())
+  name     String
+  color    String
+  active   Boolean           @default(true)
+  items    OrderItem[]
+  statuses MemberDayStatus[]
+}
+
+model DailyOrder {
+  id       Int               @id @default(autoincrement())
+  date     String            @unique
+  items    OrderItem[]
+  statuses MemberDayStatus[]
+}
+
+model OrderItem {
+  id           Int        @id @default(autoincrement())
+  dailyOrder   DailyOrder @relation(fields: [dailyOrderId], references: [id], onDelete: Cascade)
+  dailyOrderId Int
+  member       TeamMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId     Int
+  menuItemId   String
+  variantKey   String?
+  pastaType    String?
+  quantity     Int        @default(1)
+  note         String?
+}
+
+model MemberDayStatus {
+  id           Int        @id @default(autoincrement())
+  dailyOrder   DailyOrder @relation(fields: [dailyOrderId], references: [id], onDelete: Cascade)
+  dailyOrderId Int
+  member       TeamMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId     Int
+  confirmedAt  DateTime?
+
+  @@unique([dailyOrderId, memberId])
+}
+
+model Setting {
+  key   String @id
+  value String
+}
