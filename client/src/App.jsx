@@ -59,9 +59,14 @@ export default function App() {
           </div>
 
           <div className="topbar">
-            <span className="brand">
+            <button
+              className="brand"
+              style={{ background: 'none', padding: 0 }}
+              onClick={() => setCatIndex(-1)}
+              title="Retour à la couverture"
+            >
               <span className="pizza">🍕</span> LHBIB
-            </span>
+            </button>
             <span className="spacer" />
             <button className="chip accent" onClick={togglePanel}>
               🍽️ {dayState.confirmedCount}/{dayState.activeCount}
@@ -81,8 +86,8 @@ export default function App() {
           <div className="nav-arrows">
             <button
               className="nav-arrow"
-              disabled={catIndex <= 0}
-              onClick={() => setCatIndex(Math.max(0, catIndex - 1))}
+              disabled={catIndex <= -1}
+              onClick={() => setCatIndex(Math.max(-1, catIndex - 1))}
             >
               ‹
             </button>

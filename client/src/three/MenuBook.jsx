@@ -87,7 +87,7 @@ export default function MenuBook() {
     const delta = end - start
     if (Math.abs(delta) < 45) return
     if (delta < 0 && catIndex < categories.length - 1) setCatIndex(catIndex + 1)
-    if (delta > 0 && catIndex > 0) setCatIndex(catIndex - 1)
+    if (delta > 0 && catIndex > -1) setCatIndex(catIndex - 1)
   }
 
   const cat = displayed >= 0 ? categories[displayed] : null
