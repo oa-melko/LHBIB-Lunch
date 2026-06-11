@@ -84,6 +84,7 @@ export default function BookPage({ side, mode, category, currency, dimmed }) {
       <Html
         transform
         distanceFactor={2.9}
+        zIndexRange={[10, 0]}
         position={[0, 0, 0.015]}
         style={{
           opacity: dimmed ? 0.08 : 1,

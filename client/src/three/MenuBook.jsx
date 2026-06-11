@@ -20,6 +20,18 @@ export default function MenuBook() {
   const groupRef = useRef()
   const flipperRef = useRef()
   const dragStart = useRef(null)
+  const pointer = useRef({ x: 0, y: 0 })
+
+  // track the pointer at window level: the Html page content swallows
+  // pointer events, so the canvas alone never sees most moves
+  useEffect(() => {
+    const onMove = (e) => {
+      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1
+      pointer.current.y = -((e.clientY / window.innerHeight) * 2 - 1)
+    }
+    window.addEventListener('pointermove', onMove)
+    return () => window.removeEventListener('pointermove', onMove)
+  }, [])
 
   // turning-page geometry, pivot on the spine (left edge)
   const flipperGeom = useMemo(() => {
@@ -50,8 +62,8 @@ export default function MenuBook() {
     const group = groupRef.current
     if (group) {
       // subtle parallax following the pointer
-      const tx = state.pointer.x * 0.12
-      const ty = -0.1 + state.pointer.y * -0.05
+      const tx = pointer.current.x * 0.16
+      const ty = -0.1 + pointer.current.y * -0.07
       group.rotation.y += (tx - group.rotation.y) * 0.06
       group.rotation.x += (ty - group.rotation.x) * 0.06
     }
