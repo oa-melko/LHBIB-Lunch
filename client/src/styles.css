@@ -905,28 +905,6 @@ input {
   color: var(--charcoal);
 }
 
-.mini-avatar.on-cover .mini-name {
-  color: #fff;
-}
-
-.mini-avatar.on-cover {
-  padding: 3px;
-}
-
-.mini-avatar.on-cover .avatar {
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
-}
-
-.mini-avatar.on-cover.selected .avatar {
-  outline-color: #fff;
-}
-
-.mini-avatar.on-cover.selected .mini-name {
-  color: #fff;
-}
-
 .mini-avatar.selected .mini-name {
   color: var(--green-dark);
 }
@@ -937,12 +915,13 @@ input {
 
 .nav-arrows {
   position: absolute;
-  bottom: calc(95px + env(safe-area-inset-bottom));
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 10px;
   z-index: 25;
   pointer-events: none;
 }

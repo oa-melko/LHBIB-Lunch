@@ -7,15 +7,11 @@ const SPREAD_H = 4.2
 
 function FittedBook() {
   const { viewport } = useThree()
-  // narrow screens: zoom on the right page, keep the left one peeking
-  const narrow = viewport.width < SPREAD_W + 0.6
-  const s = narrow
-    ? Math.min(viewport.width / 2.75, viewport.height / 5.2)
-    : Math.min(1.05, viewport.width / (SPREAD_W + 1), viewport.height / (SPREAD_H + 1.2))
-  const x = narrow ? -1.2 * s : 0
+  // same spread layout on every screen: scale the whole book to fit
+  const s = Math.min(1.05, viewport.width / (SPREAD_W + 0.4), viewport.height / (SPREAD_H + 1.2))
 
   return (
-    <group position={[x, 0, 0]} scale={s}>
+    <group scale={s}>
       <Float speed={1.6} rotationIntensity={0.12} floatIntensity={0.4}>
         <MenuBook />
       </Float>
