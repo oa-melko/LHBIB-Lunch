@@ -7,7 +7,7 @@
     "build": "vite build",
     "start": "node server/index.js",
     "db:push": "prisma db push",
-    "test": "cross-env DATABASE_URL=file:./test.db prisma db push --force-reset --skip-generate && cross-env DATABASE_URL=file:./test.db vitest run"
+    "test": "cross-env DATABASE_URL=file:./test.db prisma db push --skip-generate && cross-env DATABASE_URL=file:./test.db vitest run"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
