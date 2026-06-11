@@ -1,0 +1,138 @@
+{
+  "restaurant": "LHBIB",
+  "currency": "dh",
+  "categories": [
+    {
+      "id": "salades",
+      "name": "Salades",
+      "emoji": "🥗",
+      "items": [
+        { "id": "salade-lahbib", "name": "Salade Lahbib", "desc": "Salade verte, tomates, olives, riz, thon, maïs, mortadelle, mozzarella", "price": 30 },
+        { "id": "salade-marocaine", "name": "Salade Marocaine", "desc": "Salade verte, tomates, concombre, oignons, poivron rouge et vert, vinaigrette", "price": 25 },
+        { "id": "salade-nicoise", "name": "Salade Niçoise", "desc": "Salade verte, concombre, carottes, haricots verts, pomme de terre, betteraves, tomates, riz, maïs, œuf, thon", "price": 39 },
+        { "id": "salade-chicken", "name": "Salade Chicken", "desc": "Salade verte, tomates, carottes, pomme de terre, betteraves, pâtes, maïs, morceaux de poulet", "price": 39 },
+        { "id": "salade-milanaise", "name": "Salade Milanaise", "desc": "Salade verte, concombre, haricots verts, pomme de terre, pâtes, maïs, tomates, anchois", "price": 39 },
+        { "id": "salade-giovanaise", "name": "Salade Giovanaise", "desc": "Salade verte, concombre, haricots verts, tomates, maïs", "price": 55 },
+        { "id": "salade-fruits-de-mer", "name": "Salade Fruits de mer", "desc": "Crevettes, calamar, concombre, haricots verts, tomates, maïs, anchois", "price": 70 },
+        { "id": "salade-royale", "name": "Salade Royale", "desc": "Tous les ingrédients avec tous les fruits de mer", "price": 80 }
+      ]
+    },
+    {
+      "id": "pizzas",
+      "name": "Pizzas",
+      "emoji": "🍕",
+      "items": [
+        { "id": "pizza-margarita", "name": "Margarita Italie", "desc": "Fromage, olives, thym, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 30 }, { "key": "emporte", "label": "Emporté", "price": 25 } ] } },
+        { "id": "pizza-thon", "name": "Pizza Thon", "desc": "Thon, thym, fromage, olives, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 40 }, { "key": "emporte", "label": "Emporté", "price": 35 } ] } },
+        { "id": "pizza-lahbib", "name": "Pizza Lahbib", "desc": "Mortadelle, thon, poivron, thym, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 40 }, { "key": "emporte", "label": "Emporté", "price": 35 } ] } },
+        { "id": "pizza-vegetarienne", "name": "Pizza Végétarienne", "desc": "Champignons, courgettes, tomates, olives, poivrons, aubergine, oignons, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 40 }, { "key": "emporte", "label": "Emporté", "price": 35 } ] } },
+        { "id": "pizza-4-fromages", "name": "Pizza 4 Fromages", "desc": "Mozzarella, fromage rouge, bleu, ricotta, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 45 }, { "key": "emporte", "label": "Emporté", "price": 40 } ] } },
+        { "id": "pizza-anouchka", "name": "Pizza Anouchka", "desc": "Hot-dog, poivrons, thym, champignons, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 45 }, { "key": "emporte", "label": "Emporté", "price": 40 } ] } },
+        { "id": "pizza-super-thon", "name": "Pizza Super Thon", "desc": "Super thon, fromage, olives, thym, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 50 }, { "key": "emporte", "label": "Emporté", "price": 45 } ] } },
+        { "id": "pizza-au-poulet", "name": "Pizza au Poulet", "desc": "Morceaux de poulet, thym, légumes grillés, olives, fromage, sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 45 }, { "key": "emporte", "label": "Emporté", "price": 40 } ] } },
+        { "id": "pizza-florance", "name": "Pizza Florance", "desc": "Viande hachée, champignons, olives, thym, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 55 }, { "key": "emporte", "label": "Emporté", "price": 50 } ] } },
+        { "id": "pizza-anchouba", "name": "Pizza Anchouba", "desc": "Anchois, champignons, olives, thym, fromage, poivrons, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 55 }, { "key": "emporte", "label": "Emporté", "price": 50 } ] } },
+        { "id": "pizza-super-pecheur", "name": "Pizza Super Pêcheur", "desc": "Crevettes, calamar, super thon, fromage rouge, thym, basilic, olives, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 80 }, { "key": "emporte", "label": "Emporté", "price": 75 } ] } },
+        { "id": "pizza-carbonara", "name": "Pizza Carbonara", "desc": "Jambon, fromage, sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 50 }, { "key": "emporte", "label": "Emporté", "price": 45 } ] } },
+        { "id": "pizza-super-vegetarienne", "name": "Pizza Super Végétarienne", "desc": "Fromage rouge, champignons frais, oignons, poivrons, thym, basilic, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 45 }, { "key": "emporte", "label": "Emporté", "price": 40 } ] } },
+        { "id": "pizza-quatre-saisons", "name": "Pizza Quatre Saisons", "desc": "Thon, crevettes, hot-dog, champignons, thym, fromage, olives, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 65 }, { "key": "emporte", "label": "Emporté", "price": 60 } ] } },
+        { "id": "pizza-mixte-cocktail", "name": "Pizza Mixte Cocktail", "desc": "Hot-dog, crevettes, poivrons, olives, champignons, thym, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 65 }, { "key": "emporte", "label": "Emporté", "price": 60 } ] } },
+        { "id": "pizza-fruits-de-mer", "name": "Pizza Fruits de mer", "desc": "Crevettes, calamar, olives, thym, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 75 }, { "key": "emporte", "label": "Emporté", "price": 70 } ] } },
+        { "id": "pizza-saumon", "name": "Pizza Saumon", "desc": "Saumon, champignons, fromage, thym, sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 75 }, { "key": "emporte", "label": "Emporté", "price": 70 } ] } },
+        { "id": "pizza-royal", "name": "Pizza Royal", "desc": "Crevettes, calamar, viande hachée, hot-dog, champignons, olives, poivrons, thym, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 85 }, { "key": "emporte", "label": "Emporté", "price": 80 } ] } },
+        { "id": "pizza-peperroni", "name": "Pizza Peperroni", "desc": "Peperroni, fromage, sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 60 }, { "key": "emporte", "label": "Emporté", "price": 55 } ] } }
+      ],
+      "note": "Tout supplément 10 dh · Supplément saumon ou fruits de mer 20 dh"
+    },
+    {
+      "id": "sandwichs",
+      "name": "Sandwichs",
+      "emoji": "🥪",
+      "note": "Grillé sur charbon de bois",
+      "items": [
+        { "id": "sandwich-poulet", "name": "Sandwich Poulet", "price": 35 },
+        { "id": "sandwich-poulet-hache", "name": "Sandwich Poulet haché", "price": 30 },
+        { "id": "sandwich-viande-hachee", "name": "Sandwich Viande hachée", "price": 40 },
+        { "id": "sandwich-mixte", "name": "Sandwich Mixte", "price": 50 },
+        { "id": "frites", "name": "Frites", "price": 10 }
+      ]
+    },
+    {
+      "id": "plats",
+      "name": "Plats grillés",
+      "emoji": "🍢",
+      "note": "Grillé sur charbon de bois",
+      "items": [
+        { "id": "brochette-poulet", "name": "Brochette de Poulet", "price": 50 },
+        { "id": "brochette-viande-hachee", "name": "Brochette Viande hachée", "price": 60 },
+        { "id": "brochette-poulet-hache", "name": "Brochette Poulet haché", "price": 60 },
+        { "id": "mixte-grille", "name": "Mixte Grillé", "price": 80 }
+      ]
+    },
+    {
+      "id": "couscous",
+      "name": "Couscous",
+      "emoji": "🫕",
+      "note": "Vendredi seulement !",
+      "items": [
+        { "id": "couscous-viande", "name": "Couscous Viande", "price": 70 },
+        { "id": "couscous-poulet", "name": "Couscous Poulet", "price": 55 }
+      ]
+    },
+    {
+      "id": "pates",
+      "name": "Pâtes",
+      "emoji": "🍝",
+      "note": "Au choix : Spaghetti, Tagliatelle ou Penne",
+      "choice": { "label": "Type de pâtes", "options": ["Spaghetti", "Tagliatelle", "Penne"] },
+      "items": [
+        { "id": "pates-carbonara", "name": "Carbonara", "desc": "Jambon, champignons, fromage, sauce blanche ou sauce tomate", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 50 }, { "key": "emporte", "label": "Emporté", "price": 45 } ] } },
+        { "id": "pates-vegetarienne", "name": "Végétarienne", "desc": "Courgette, aubergine, champignons, tomates cerises, poivron vert et rouge, olives noires, sauce spéciale", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 45 }, { "key": "emporte", "label": "Emporté", "price": 40 } ] } },
+        { "id": "pates-bolognaise", "name": "Bolognaise", "desc": "Viande hachée, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 60 }, { "key": "emporte", "label": "Emporté", "price": 55 } ] } },
+        { "id": "pates-au-poulet", "name": "Au Poulet", "desc": "Poulet, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 55 }, { "key": "emporte", "label": "Emporté", "price": 50 } ] } },
+        { "id": "pates-au-thon", "name": "Au Thon", "desc": "Thon, sauce tomate, fromage", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 50 }, { "key": "emporte", "label": "Emporté", "price": 45 } ] } },
+        { "id": "pates-fruits-de-mer", "name": "Fruits de mer", "desc": "Crevettes, calamar, crème fraîche, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 75 }, { "key": "emporte", "label": "Emporté", "price": 70 } ] } },
+        { "id": "pates-au-saumon", "name": "Au Saumon", "desc": "Saumon, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 75 }, { "key": "emporte", "label": "Emporté", "price": 70 } ] } },
+        { "id": "pates-royal", "name": "Royal", "desc": "Crevettes, calamar, saumon, fromage, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 80 }, { "key": "emporte", "label": "Emporté", "price": 75 } ] } }
+      ]
+    },
+    {
+      "id": "lasagne",
+      "name": "Lasagne",
+      "emoji": "🧀",
+      "items": [
+        { "id": "lasagne", "name": "Lasagne", "desc": "Pâtes, viande hachée, crème fraîche, sauce tomate ou sauce blanche", "variants": { "label": "Service", "default": "emporte", "options": [ { "key": "surplace", "label": "Sur place", "price": 65 }, { "key": "emporte", "label": "Emporté", "price": 60 } ] } }
+      ]
+    },
+    {
+      "id": "boissons",
+      "name": "Boissons",
+      "emoji": "🥤",
+      "items": [
+        { "id": "eau-minerale", "name": "Eau minérale", "variants": { "label": "Format", "default": "petite", "options": [ { "key": "petite", "label": "Petite", "price": 7 }, { "key": "grande", "label": "Grande", "price": 10 } ] } },
+        { "id": "boisson-gazeuse", "name": "Boisson gazeuse", "variants": { "label": "Format", "default": "petite", "options": [ { "key": "petite", "label": "Petite", "price": 13 }, { "key": "grande", "label": "Grande", "price": 20 } ] } },
+        { "id": "orangina", "name": "Orangina", "price": 13 }
+      ]
+    },
+    {
+      "id": "jus",
+      "name": "Jus",
+      "emoji": "🍊",
+      "items": [
+        { "id": "jus-orange", "name": "Jus d'orange", "price": 15 },
+        { "id": "jus-citron", "name": "Jus de citron", "price": 15 },
+        { "id": "jus-au-choix", "name": "Jus au choix (selon saison)", "price": 20 },
+        { "id": "cocktail-fruits", "name": "Cocktail de fruits", "price": 20 }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts",
+      "emoji": "🍰",
+      "items": [
+        { "id": "cheese-cake", "name": "Cheese Cake", "price": 20 },
+        { "id": "tiramisu", "name": "Tiramisu", "price": 20 }
+      ]
+    }
+  ]
+}
