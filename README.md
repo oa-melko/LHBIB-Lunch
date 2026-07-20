@@ -1,5 +1,21 @@
 # 🍕 LHBIB Lunch
 
+## 📡 Accès équipe (LAN) — http://192.168.100.134:3001
+
+L'app est **hors schéma ports Melko** (60XX/61XX) : elle garde son port **3001** (serveur unique)
+et **5173** (dev). Le serveur écoute sur toutes les interfaces → l'équipe ouvre simplement
+**http://192.168.100.134:3001** sur téléphone/PC (même réseau Wi-Fi).
+
+```powershell
+git clone https://github.com/oa-melko/LHBIB-Lunch.git
+cd LHBIB-Lunch
+npm install
+npm run db:push                         # crée la base SQLite (prisma/dev.db)
+npm run build                           # build du frontend
+npm start                               # serveur unique → http://192.168.100.134:3001
+```
+
+
 L'app du déj de l'équipe : un menu 3D du restaurant LHBIB qu'on feuillette comme un vrai livre.
 Chacun ouvre le lien sur son téléphone, choisit ses plats, et celui qui descend commander
 envoie le récap sur WhatsApp (ou le copie) en un clic. Fini les notes dans le groupe Telegram 😄
