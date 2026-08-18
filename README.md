@@ -35,8 +35,8 @@ Pour les tests : `npm test`
 
 ## Exposer l'app à l'équipe (tunnel)
 
-Le serveur écoute sur **un seul port (3001)** — il sert l'app, l'API et le temps réel
-(Socket.IO). Il suffit de pointer ton tunnel dessus, par exemple :
+Le serveur écoute sur **un seul port (3001)** — il sert à la fois l'app et l'API.
+Il suffit de pointer ton tunnel dessus, par exemple :
 
 ```powershell
 # Cloudflare (recommandé : URL stable avec un named tunnel)
@@ -51,9 +51,49 @@ ngrok), sinon le lien de l'équipe change à chaque redémarrage.
 
 Le port se change avec la variable d'environnement `PORT`.
 
-## Déploiement (Google Cloud Run)
+## Déploiement (Vercel)
 
-L'app part en **un seul conteneur** (voir [Dockerfile](Dockerfile)) : Express + Socket.IO
+L'app se découpe en deux sur Vercel : le frontend buildé (`client/dist`) est servi en
+statique, et l'API Express tourne en **Serverless Function** via [api/[...path].js](api/[...path].js).
+Tout est décrit dans [vercel.json](vercel.json).
+
+### 1. La base (Neon)
+
+Créer un projet sur [neon.tech](https://neon.tech), ouvrir le **SQL Editor**, y coller
+[docs/schema-neon.sql](docs/schema-neon.sql) et l'exécuter.
+
+⚠️ Copier ensuite la connection string **avec le pooler** — l'URL qui contient `-pooler` :
+
+```
+postgresql://user:motdepasse@ep-xxx-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require
+```
+
+En serverless, chaque requête peut ouvrir sa propre connexion. Sans le pooler, le nombre
+de connexions Postgres part en vrille et l'app tombe aux heures de pointe.
+
+### 2. Le projet Vercel
+
+Importer le dépôt sur [vercel.com](https://vercel.com), puis dans **Settings →
+Environment Variables** ajouter `DATABASE_URL` avec l'URL ci-dessus. Rien d'autre à
+configurer : `vercel.json` fixe déjà la commande de build et le dossier de sortie.
+
+Chaque `git push` sur `master` redéploie automatiquement.
+
+### Pas de temps réel : du polling
+
+Vercel ne sait pas maintenir de WebSocket, donc il n'y a plus de Socket.IO. À la place,
+[client/src/sync.js](client/src/sync.js) réinterroge `/api/state` toutes les 5 secondes,
+**uniquement quand l'onglet est visible** (sinon dix téléphones ouverts toute la journée
+épuiseraient le quota d'invocations).
+
+Les actions de celui qui les fait restent instantanées : les routes de mutation renvoient
+déjà l'état complet de la journée, et [client/src/api.js](client/src/api.js) l'applique
+directement au store. Le polling ne sert qu'à voir arriver les commandes des autres, avec
+5 secondes de décalage au pire.
+
+## Déploiement alternatif (Google Cloud Run)
+
+L'app part en **un seul conteneur** (voir [Dockerfile](Dockerfile)) : Express
 servent l'API, le temps réel et le frontend buildé, sur le port fourni par `PORT`.
 
 ⚠️ Le disque de Cloud Run est **éphémère** : la base n'est plus SQLite mais un
@@ -84,7 +124,6 @@ gcloud run deploy lhbib-lunch `
   --region europe-west1 `
   --allow-unauthenticated `
   --max-instances 1 `
-  --timeout 3600 `
   --set-env-vars "DATABASE_URL=postgresql://..."
 ```
 
@@ -95,8 +134,7 @@ Cloud Run répond avec l'URL HTTPS de l'équipe. Pour redéployer : la même com
 
 | Option | Raison |
 |---|---|
-| `--max-instances 1` | `io.emit()` diffuse depuis la mémoire de l'instance. Avec plusieurs instances, une partie de l'équipe ne recevrait pas les mises à jour temps réel. |
-| `--timeout 3600` | Sans ça, les WebSockets sont coupés au bout de 5 min (défaut Cloud Run). |
+| `--max-instances 1` | Une seule instance suffit largement, et ça borne la facture. |
 | `--allow-unauthenticated` | L'équipe ouvre le lien sans compte Google. |
 
 💡 `DATABASE_URL` contient un mot de passe : il vit **uniquement** dans `.env` (ignoré par
@@ -139,5 +177,5 @@ et la catégorie Pâtes a un `choice` (Spaghetti / Tagliatelle / Penne).
 
 ## Stack
 
-Node.js + Express 5 + Socket.IO + Prisma/SQLite côté serveur ·
+Node.js + Express 5 + Prisma/PostgreSQL côté serveur ·
 React 19 + react-three-fiber (Three.js) côté client · Vite · Vitest.

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useStore, selectMe } from './store.js'
 import { api } from './api.js'
-import { connectSocket } from './socket.js'
+import { startSync } from './sync.js'
 import NamePicker from './components/NamePicker.jsx'
 import Tabs from './components/Tabs.jsx'
 import Dashboard from './components/Dashboard.jsx'
@@ -20,14 +20,14 @@ export default function App() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const socket = connectSocket()
+    const stopSync = startSync()
     Promise.all([api.getMenu(), api.getState()])
       .then(([menu, state]) => {
         useStore.getState().setMenu(menu)
         useStore.getState().setDayState(state)
       })
       .catch((e) => setError(e.message))
-    return () => socket.disconnect()
+    return stopSync
   }, [])
 
   if (error)
