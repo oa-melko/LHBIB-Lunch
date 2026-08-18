@@ -51,6 +51,68 @@ ngrok), sinon le lien de l'équipe change à chaque redémarrage.
 
 Le port se change avec la variable d'environnement `PORT`.
 
+## Déploiement (Google Cloud Run)
+
+L'app part en **un seul conteneur** (voir [Dockerfile](Dockerfile)) : Express + Socket.IO
+servent l'API, le temps réel et le frontend buildé, sur le port fourni par `PORT`.
+
+⚠️ Le disque de Cloud Run est **éphémère** : la base n'est plus SQLite mais un
+**Postgres externe** (Neon, offre gratuite).
+
+### 1. La base (Neon)
+
+Créer un projet sur [neon.tech](https://neon.tech), copier la chaîne de connexion, puis
+initialiser le schéma depuis ton poste :
+
+```powershell
+# .env local
+DATABASE_URL="postgresql://user:motdepasse@ep-xxx.eu-central-1.aws.neon.tech/neondb?sslmode=require"
+
+npx prisma generate
+npm run db:push
+```
+
+### 2. Le déploiement
+
+```powershell
+gcloud auth login
+gcloud config set project <ID-DU-PROJET>
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+
+gcloud run deploy lhbib-lunch `
+  --source . `
+  --region europe-west1 `
+  --allow-unauthenticated `
+  --max-instances 1 `
+  --timeout 3600 `
+  --set-env-vars "DATABASE_URL=postgresql://..."
+```
+
+Cloud Run répond avec l'URL HTTPS de l'équipe. Pour redéployer : la même commande
+(les `--set-env-vars` sont conservés si on les omet lors d'une mise à jour).
+
+### Pourquoi ces options
+
+| Option | Raison |
+|---|---|
+| `--max-instances 1` | `io.emit()` diffuse depuis la mémoire de l'instance. Avec plusieurs instances, une partie de l'équipe ne recevrait pas les mises à jour temps réel. |
+| `--timeout 3600` | Sans ça, les WebSockets sont coupés au bout de 5 min (défaut Cloud Run). |
+| `--allow-unauthenticated` | L'équipe ouvre le lien sans compte Google. |
+
+💡 `DATABASE_URL` contient un mot de passe : il vit **uniquement** dans `.env` (ignoré par
+git) et dans les variables d'environnement du service Cloud Run. Jamais dans le repo.
+
+### Développement local
+
+Le provider Prisma est maintenant `postgresql` : `npm run dev` a besoin d'un Postgres.
+Le plus simple est de pointer le `.env` sur Neon. Pour les tests, un Postgres jetable :
+
+```powershell
+npm run test:db:up     # conteneur Postgres sur le port 5435
+npm test
+npm run test:db:down
+```
+
 ## Utilisation
 
 1. Chacun ouvre le lien, choisit **son prénom** (mémorisé sur son appareil).

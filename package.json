@@ -7,7 +7,9 @@
     "build": "vite build",
     "start": "node server/index.js",
     "db:push": "prisma db push",
-    "test": "cross-env DATABASE_URL=file:./test.db prisma db push --skip-generate && cross-env DATABASE_URL=file:./test.db vitest run"
+    "test": "cross-env DATABASE_URL=postgresql://postgres:test@localhost:5435/postgres prisma db push --skip-generate && cross-env DATABASE_URL=postgresql://postgres:test@localhost:5435/postgres vitest run",
+    "test:db:up": "docker run --rm -d --name lhbib-test-db -e POSTGRES_PASSWORD=test -p 5435:5432 postgres:17-alpine",
+    "test:db:down": "docker stop lhbib-test-db"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
