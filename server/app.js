@@ -123,5 +123,23 @@ export function createApp({ prisma, menu, onChange }) {
     res.json({ text: formatOrderMessage(state) })
   })
 
+  // Express 5 fait remonter ici les rejets des handlers async. Sans ce filet, toute panne
+  // de base ressort en « Internal Server Error » nu et il faut aller fouiller les logs de
+  // l'hébergeur. On renvoie le code Prisma, qui suffit à identifier la cause — jamais le
+  // message brut, qui peut contenir la chaîne de connexion.
+  app.use((err, _req, res, _next) => {
+    console.error(err)
+    const causes = {
+      P1001: "base injoignable — vérifie DATABASE_URL et que l'instance est réveillée",
+      P1000: 'authentification refusée — identifiants incorrects dans DATABASE_URL',
+      P1003: "la base nommée dans DATABASE_URL n'existe pas",
+      P2021: "tables absentes — le schéma SQL n'a pas été exécuté sur la base",
+    }
+    res.status(500).json({
+      error: causes[err.code] ?? 'erreur serveur',
+      code: err.code ?? null,
+    })
+  })
+
   return app
 }
