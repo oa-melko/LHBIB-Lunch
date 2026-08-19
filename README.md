@@ -54,7 +54,7 @@ Le port se change avec la variable d'environnement `PORT`.
 ## Déploiement (Vercel)
 
 L'app se découpe en deux sur Vercel : le frontend buildé (`client/dist`) est servi en
-statique, et l'API Express tourne en **Serverless Function** via [api/[...path].js](api/[...path].js).
+statique, et l'API Express tourne en **Serverless Function** via [api/index.js](api/index.js).
 Tout est décrit dans [vercel.json](vercel.json).
 
 ### 1. La base (Neon)

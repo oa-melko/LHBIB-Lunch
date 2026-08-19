@@ -2,9 +2,12 @@
   "buildCommand": "prisma generate && npm run build",
   "outputDirectory": "client/dist",
   "functions": {
-    "api/[...path].js": {
+    "api/index.js": {
       "includeFiles": "data/**"
     }
   },
-  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }
